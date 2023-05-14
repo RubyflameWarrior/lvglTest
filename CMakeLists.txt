@@ -3,10 +3,7 @@ include(FetchContent)
 
 project(MyProject LANGUAGES C CXX)
 
-set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-
-# Build an executable called "lvglTest"
-add_executable(lvglTest src/main.cpp )
+set(CMAKE_EXPORT_COMPILE_COMMANDS TRUE)
 
 find_package(SDL2 REQUIRED)
 include_directories(${SDL2_INCLUDE_DIRS})
@@ -35,6 +32,14 @@ FetchContent_Declare(lv_drivers
                      )
 FetchContent_MakeAvailable(lv_drivers)
 
+include_directories(include)
 
-# The target "lvglTest" depends on LVGL, drivers and demos
-target_link_libraries(lvglTest PUBLIC lvgl::lvgl lvgl::drivers lvgl::examples lv_drivers ${SDL2_LIBRARIES})
+# Build an executable called "lvglTest"
+add_executable(lvglTest
+  src/gui/screen.cpp
+  src/gui/page.cpp
+  src/gui/graph.cpp
+  src/mouse_cursor_icon.c 
+  src/main.cpp
+  )
+target_link_libraries(lvglTest lvgl lv_drivers ${SDL2_LIBRARIES})
