@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 3.14)
 include(FetchContent)
 
+set(CMAKE_C_COMPILER gcc)
+set(CMAKE_CXX_COMPILER g++)
+
 project(MyProject LANGUAGES C CXX)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS TRUE)
